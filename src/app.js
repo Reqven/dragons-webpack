@@ -19,7 +19,7 @@ const addDragons = () => {
     const relationList = document.createElement("ul");
 
     const avg = getAVGForceById(dragon.id);
-    const relations = getRelationsById(dragon.id).map((id) =>getDragonById(id));
+    const relations = getRelationsById(dragon.id).map((id) => getDragonById(id));
 
     dragonLi.id = dragon.id;
     dragonLi.innerHTML = `${dragon.id}. ${dragon.name}`;
