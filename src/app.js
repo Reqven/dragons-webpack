@@ -18,12 +18,13 @@ const addDragons = () => {
     const dragonLi = document.createElement("li");
     const relationList = document.createElement("ul");
 
+    const { id, name, element } = dragon;
     const avg = getAVGForceById(dragon.id);
     const relations = getRelationsById(dragon.id).map((id) => getDragonById(id));
 
-    dragonLi.id = dragon.id;
-    dragonLi.innerHTML = `${dragon.id}. ${dragon.name}`;
-    dragonLi.innerHTML += dragon?.element ? `, element: ${dragon.element}` : "";
+    dragonLi.id = id;
+    dragonLi.innerHTML = `${id}. ${name}`;
+    dragonLi.innerHTML += element ? `, element: ${element}` : "";
     dragonLi.innerHTML += `, force: ${avg}`;
 
     for (const relatedDragon of relations) {
@@ -45,11 +46,11 @@ const onOrder = (e) => {
     .forEach((li) => dragonList.appendChild(li));
 };
 
-document.body.onload = () => {
+document.addEventListener("DOMContentLoaded", (e) => {
   addCount();
   setTimeout(() => {
     addDragons();
     const orderButton = document.querySelector("#order");
     orderButton.addEventListener("click", onOrder);
   }, 500);
-};
+});
