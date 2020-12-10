@@ -26,6 +26,7 @@ const addDragons = () => {
     dragonLi.innerHTML = `${id}. ${name}`;
     dragonLi.innerHTML += element ? `, element: ${element}` : "";
     dragonLi.innerHTML += `, force: ${avg}`;
+    dragonLi.setAttribute('force', avg);
 
     for (const relatedDragon of relations) {
       const relatedDragonLi = document.createElement("li");
@@ -42,8 +43,9 @@ const onOrder = (e) => {
   ascendingOrder = !ascendingOrder;
 
   Array.from(dragonList.children)
-    .sort((a, b) => (ascendingOrder ? a.id - b.id : b.id - a.id))
-    .forEach((li) => dragonList.appendChild(li));
+    .map(li => ({ li, force: li.getAttribute('force') }))
+    .sort((a, b) => (ascendingOrder ? a.force - b.force : b.force - a.force))
+    .forEach(data => dragonList.appendChild(data.li));
 };
 
 document.addEventListener("DOMContentLoaded", (e) => {
